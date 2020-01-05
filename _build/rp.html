@@ -1,0 +1,179 @@
+---
+interact_link: content/rp.ipynb
+kernel_name: python3
+has_widgets: false
+title: |-
+  Random Processes
+prev_page:
+  url: /process_intro.html
+  title: |-
+    Random Processes
+next_page:
+  url: /dt.html
+  title: |-
+    DT Function
+suffix: .ipynb
+
+comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
+---
+
+    <main class="jupyter-page">
+    
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Random-Processes">Random Processes<a class="anchor-link" href="#Random-Processes"> </a></h1>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Be sure to import Symbulate using the following commands.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">symbulate</span> <span class="k">import</span> <span class="o">*</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>RandomProcess</code> is the easy way to create random processes in Symbulate.</p>
+<p>Much like <code>RV</code>, a <strong>RandomProcess</strong> can be defined on a ProbabilitySpace.  For a <code>RandomProcess</code>, however, the <code>index_set</code> must also be specified.  <code>index_set</code> tells us which indices the process is defined over. It defaults to <code>Naturals()</code> but can also be se to <code>Reals()</code> for continuous time processes.</p>
+<p>The first argument in <code>RandomProcess</code> is the probability space which RandomProcess uses. Then the <code>index_set</code> tells us which numbers the process will work over. Lastly, we can define <code>func</code>, which takes a draw from the probability space and the time value as inputs, and returns the value of the random process.</p>
+<p><em>Example:</em> Here we take two draws from a box with <code>0</code>, <code>1</code>, and <code>2</code> tickets. At each of the real numbers the value of the RP is equal to the first draw plus the second draw times time. We simulate this 10 times.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">P</span> <span class="o">=</span> <span class="n">BoxModel</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">omega</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">omega</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">omega</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">t</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">RandomProcess</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">index_set</span><span class="o">=</span><span class="n">Reals</span><span class="p">(),</span> <span class="n">func</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+<span class="n">X</span><span class="o">.</span><span class="n">sim</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="images/rp_4_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>For cumulating results (for instance, a random walk) we may need to draw from a <code>RV</code> and add this to process results.</p>
+<p>Here we define a probability space that either goes forward or backwards once, an infinite amount of times. We want a random process that cumulates the values of this random walk. To accomplish this we</p>
+
+<pre><code>1. Create a `RandomProcess` on the `Naturals()`
+2. Create a `RV` that pulls from the desired box model
+3. Set the the first value of our RP to 0 and then loop through a draw from our `RV` (which has infinite entries) and incrementally add them to each poistion in our RP. 
+4. Simulate this 10 times</code></pre>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">P</span> <span class="o">=</span> <span class="n">BoxModel</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="n">inf</span><span class="p">)</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">RV</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">RandomProcess</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">index_set</span><span class="o">=</span><span class="n">Naturals</span><span class="p">())</span>
+<span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+    <span class="n">X</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">+</span> <span class="n">Z</span><span class="p">[</span><span class="n">n</span><span class="p">]</span>
+
+<span class="n">X</span><span class="o">.</span><span class="n">sim</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="images/rp_6_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+ 
+
+
+    </main>
+    

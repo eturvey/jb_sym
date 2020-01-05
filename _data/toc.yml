@@ -165,6 +165,7 @@
 
 # Top-level page
 - title: Independent and Custom Probability Spaces
+  url: /indy_intro
   not_numbered: true
   sections:
   - title: The * Operator
@@ -263,6 +264,21 @@
     not_numbered: true
   - title: Multivariate Normal Distribution
     url: /mvn
+    not_numbered: true
+
+# Top-level page
+- title: Random Processes
+  url: /process_intro
+  not_numbered: true
+  sections:
+  - title: Random Processes
+    url: /rp
+    not_numbered: true
+  - title: DT Function
+    url: /dt
+    not_numbered: true
+  - title: CT Function
+    url: /ct
     not_numbered: true
 
 # Top-level page
