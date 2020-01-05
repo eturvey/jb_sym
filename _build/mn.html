@@ -1,0 +1,210 @@
+---
+interact_link: content/mn.ipynb
+kernel_name: python3
+has_widgets: false
+title: |-
+  Multinomial Distribution
+prev_page:
+  url: /common_joint_intro.html
+  title: |-
+    Common Joint Models
+next_page:
+  url: /bvn.html
+  title: |-
+    Bivariate Normal Distribution
+suffix: .ipynb
+
+comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
+---
+
+    <main class="jupyter-page">
+    
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Multinomial-Distribution">Multinomial Distribution<a class="anchor-link" href="#Multinomial-Distribution"> </a></h1>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Be sure to import Symbulate using the following commands.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">symbulate</span> <span class="k">import</span> <span class="o">*</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A <strong>Multinomial</strong> distribution is a generalized form of the Binomial distribution. We want some event to occur <code>n</code> times and we have a vector of probabilities, <code>p</code> that tell us how likely the event is to occur at that instance. The vector of probabilities must sum to 1.</p>
+<p>The pmf looks like this:
+$$
+f(x_1,\cdots, x_n) = \frac{n!}{x_1!\cdots x_k!} p_1^{x_1} \cdots p_k^{x_k}
+$$</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">RV</span><span class="p">(</span><span class="n">Multinomial</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span><span class="o">.</span><span class="mi">4</span><span class="p">,</span><span class="o">.</span><span class="mi">1</span><span class="p">]))</span>
+<span class="n">X</span><span class="o">.</span><span class="n">sim</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+
+    <table>
+      <thead>
+        <th width="10%">Index</th>
+        <th width="90%">Result</th>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td>0</td><td>(2, 2, 1)</td>
+        </tr>
+        
+        <tr>
+          <td>1</td><td>(3, 0, 2)</td>
+        </tr>
+        
+        <tr>
+          <td>2</td><td>(3, 2, 0)</td>
+        </tr>
+        
+        <tr>
+          <td>3</td><td>(1, 2, 2)</td>
+        </tr>
+        
+        <tr>
+          <td>4</td><td>(1, 4, 0)</td>
+        </tr>
+        
+        <tr>
+          <td>5</td><td>(0, 4, 1)</td>
+        </tr>
+        
+        <tr>
+          <td>6</td><td>(4, 0, 1)</td>
+        </tr>
+        
+        <tr>
+          <td>7</td><td>(2, 2, 1)</td>
+        </tr>
+        
+        <tr>
+          <td>8</td><td>(2, 2, 1)</td>
+        </tr>
+        <tr><td>...</td><td>...</td></tr>
+        <tr>
+          <td>99</td><td>(3, 2, 0)</td>
+        </tr>
+        
+      </tbody>
+    </table>
+        
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">X</span><span class="o">.</span><span class="n">sim</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="images/mn_5_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>When we plot these simulations we are given the index along the x-axis (i.e. when the event occured) and the number of occurences at that instance along the y-axis.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+ 
+
+
+    </main>
+    

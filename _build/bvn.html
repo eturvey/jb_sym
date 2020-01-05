@@ -1,0 +1,286 @@
+---
+interact_link: content/bvn.ipynb
+kernel_name: python3
+has_widgets: false
+title: |-
+  Bivariate Normal Distribution
+prev_page:
+  url: /mn.html
+  title: |-
+    Multinomial Distribution
+next_page:
+  url: /mvn.html
+  title: |-
+    Multivariate Normal Distribution
+suffix: .ipynb
+
+comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
+---
+
+    <main class="jupyter-page">
+    
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Bivariate-Normal-(BVN)-Distribution">Bivariate Normal (BVN) Distribution<a class="anchor-link" href="#Bivariate-Normal-(BVN)-Distribution"> </a></h1>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Be sure to import Symbulate using the following commands.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">symbulate</span> <span class="k">import</span> <span class="o">*</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A <strong>Bivariate Normal</strong> (a.k.a. <strong>Bivariate Gaussian</strong>) is specified by two marginal means $\mu_1, \mu_2$, two marginal standard deviations $\sigma_1, \sigma_2$ (or variances), and the correlation coefficient $\rho$ (or covariance).  A Bivariate normal distribution has joint density
+$$
+f(x, y) = \frac{1}{2\pi\sigma_1\sigma_2 \sqrt{1-\rho^2}} \exp\left(-\frac{1}{2(1-\rho^2)}\left[\left(\frac{x-\mu_1}{\sigma_1}\right)^2 + \left(\frac{y-\mu_2}{\sigma_2}\right)^2 - 2\rho \left(\frac{x-\mu_1}{\sigma_1}\right)\left(\frac{y-\mu_2}{\sigma_2}\right)\right]\right), \quad -\infty &lt; x&lt; \infty, \, -\infty &lt; y &lt; \infty
+$$</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">RV</span><span class="p">(</span><span class="n">BivariateNormal</span><span class="p">(</span><span class="n">mean1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">mean2</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sd1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sd2</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">corr</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">))</span><span class="o">.</span><span class="n">sim</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+
+    <table>
+      <thead>
+        <th width="10%">Index</th>
+        <th width="90%">Result</th>
+      </thead>
+      <tbody>
+        
+        <tr>
+          <td>0</td><td>(0.7090779226506807, 1.8056585365503115)</td>
+        </tr>
+        
+        <tr>
+          <td>1</td><td>(-1.0785401777016108, 0.9730476413984046)</td>
+        </tr>
+        
+        <tr>
+          <td>2</td><td>(-0.02402185213952246, -1.3530975665694633)</td>
+        </tr>
+        
+        <tr>
+          <td>3</td><td>(-0.7811018839696846, -2.293565019764962)</td>
+        </tr>
+        
+        <tr>
+          <td>4</td><td>(0.7659750435576479, 2.404278601821021)</td>
+        </tr>
+        
+      </tbody>
+    </table>
+        
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">RV</span><span class="p">(</span><span class="n">BivariateNormal</span><span class="p">(</span><span class="n">mean1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">mean2</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sd1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sd2</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">corr</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">))</span><span class="o">.</span><span class="n">sim</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">x</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">)</span>
+<span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">x</span><span class="o">.</span><span class="n">sd</span><span class="p">(),</span> <span class="n">x</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>((-0.013167437916605679, 0.9554440598343001),
+ (1.0037364943028009, 2.021611826345434),
+ 0.5086554151800189)</pre>
+</div>
+
+</div>
+</div>
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="images/bvn_5_1.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">RV</span><span class="p">(</span><span class="n">BivariateNormal</span><span class="p">(</span><span class="n">mean1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">mean2</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sd1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sd2</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">corr</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">))</span><span class="o">.</span><span class="n">sim</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">)</span>
+<span class="n">RV</span><span class="p">(</span><span class="n">BivariateNormal</span><span class="p">(</span><span class="n">mean1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">mean2</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">var1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">var2</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="n">cov</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.8</span><span class="p">))</span><span class="o">.</span><span class="n">sim</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="images/bvn_6_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The marginal distributions of a bivariate normal distribution are (univariate) normal distributions.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">RV</span><span class="p">(</span><span class="n">BivariateNormal</span><span class="p">(</span><span class="n">mean1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">mean2</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sd1</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sd2</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">corr</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">))</span>
+<span class="n">X</span><span class="o">.</span><span class="n">sim</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="images/bvn_8_0.png"
+>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Note that in the last few sections we were able to plot the true (unsimulated) pdfs for built in distributions. This functionality is not currently available for the BVN distribution.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+ 
+
+
+    </main>
+    

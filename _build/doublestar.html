@@ -1,0 +1,165 @@
+---
+interact_link: content/doublestar.ipynb
+kernel_name: python3
+has_widgets: false
+title: |-
+  The ** Operator
+prev_page:
+  url: /star.html
+  title: |-
+    The * Operator
+next_page:
+  url: /oop.html
+  title: |-
+    Order of Operations with * and **
+suffix: .ipynb
+
+comment: "***PROGRAMMATICALLY GENERATED, DO NOT EDIT. SEE ORIGINAL FILES IN /content***"
+---
+
+    <main class="jupyter-page">
+    
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="The-**-Operator">The ** Operator<a class="anchor-link" href="#The-**-Operator"> </a></h1>
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Be sure to import Symbulate using the following commands.
+<a id='joint'></a></p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">symbulate</span> <span class="k">import</span> <span class="o">*</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The <code>**</code> operator is a very useful tool in symbulate that allows us to define iid variables quickly and easily and, similar to the <code>*</code> operator we can use either slicing or unpacking to access the results.</p>
+<p>When we use the <code>**</code> operator and simulate a result, we are really creating a vector with each entry representing an independent draw from the defined probability space the specified number of times. In the example below we see the resulting draw is a vector with 6 entries representing independent draws from the Normal(0,1) distribution.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">normvec</span> <span class="o">=</span> <span class="n">RV</span><span class="p">(</span><span class="n">Normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">**</span> <span class="mi">6</span><span class="p">)</span>
+<span class="n">normvec</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(1.3066083968578444, -0.42014021588093087, -0.24653514722791392, 0.1454539577308929, 0.28626119550621437, -0.19472292491423548)</pre>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>From here we can use slicing to store each entry of the vector. Similarly we could have defined 3 variables using unpacking.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class="jb_cell">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">first</span> <span class="o">=</span> <span class="n">normvec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">second</span> <span class="o">=</span> <span class="n">normvec</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">third</span> <span class="o">=</span> <span class="n">normvec</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">fourth</span> <span class="o">=</span> <span class="n">normvec</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">fifth</span> <span class="o">=</span> <span class="n">normvec</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">sixth</span> <span class="o">=</span> <span class="n">normvec</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+
+<span class="n">first</span><span class="o">.</span><span class="n">draw</span><span class="p">(),</span> <span class="n">second</span><span class="o">.</span><span class="n">draw</span><span class="p">(),</span> <span class="n">third</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span> <span class="c1">#and so on</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="jb_output_wrapper }}">
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(-0.5264437064896508, 1.1620339167182665, -0.180506391516277)</pre>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+ 
+
+
+    </main>
+    
